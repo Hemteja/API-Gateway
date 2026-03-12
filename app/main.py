@@ -4,6 +4,7 @@ from app.db.base import Base
 import app.models.user
 import app.models.route
 import app.models.request_log
+from app.routers import auth
 
 
 app = FastAPI(
@@ -15,6 +16,8 @@ app = FastAPI(
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
+
+app.include_router(auth.router)
 
 @app.get("/health")
 def health_check():
