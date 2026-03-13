@@ -1,10 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from app.db.session import engine
 from app.db.base import Base
 import app.models.user
 import app.models.route
 import app.models.request_log
 from app.routers import auth
+from app.auth.dependencies import get_current_user
+from app.models.user import User
 
 
 app = FastAPI(
@@ -26,4 +28,9 @@ def health_check():
         "service": "api-gateway"
     }
 
-
+@app.get("/protected")
+def protected_route(current_user: User = Depends(get_current_user)):
+    return {
+        "message": f"Hello {current_user.email}",
+        "user_id": current_user.id
+    }
