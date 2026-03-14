@@ -10,7 +10,7 @@ from app.models.user import User
 
 
 app = FastAPI(
-    title="API Gateway",
+    title="API-Gateway",
     description="A self-hostable API Gateway with rate limiting",
     version="0.1.0"
 )
