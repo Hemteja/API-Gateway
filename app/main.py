@@ -7,6 +7,7 @@ import app.models.request_log
 from app.routers import auth
 from app.auth.dependencies import get_current_user
 from app.models.user import User
+from app.routers import auth, routes
 
 
 app = FastAPI(
@@ -20,6 +21,8 @@ def startup():
     Base.metadata.create_all(bind=engine)
 
 app.include_router(auth.router)
+app.include_router(auth.router)
+app.include_router(routes.router)
 
 @app.get("/health")
 def health_check():
