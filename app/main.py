@@ -24,6 +24,8 @@ app.include_router(auth.router)
 app.include_router(auth.router)
 app.include_router(routes.router)
 
+# Health check - end point
+
 @app.get("/health")
 def health_check():
     return {
