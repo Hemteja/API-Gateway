@@ -7,8 +7,7 @@ import app.models.request_log
 from app.routers import auth
 from app.auth.dependencies import get_current_user
 from app.models.user import User
-from app.routers import auth, routes
-
+from app.routers import auth, routes, gateway
 
 app = FastAPI(
     title="API-Gateway",
@@ -23,6 +22,7 @@ def startup():
 app.include_router(auth.router)
 app.include_router(auth.router)
 app.include_router(routes.router)
+app.include_router(gateway.router)
 
 # Health check - end point
 
